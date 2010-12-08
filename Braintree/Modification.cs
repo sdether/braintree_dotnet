@@ -12,6 +12,7 @@ namespace Braintree
         public Int32? Quantity { get; protected set; }
         public string Id { get; protected set; }
 
+        protected Modification() {}
         internal Modification(NodeWrapper node)
         {
             Amount = node.GetDecimal("amount");

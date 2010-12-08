@@ -102,6 +102,8 @@ namespace Braintree
         public SubscriptionDurationUnit TrialDurationUnit { get; protected set; }
         public String MerchantAccountId { get; protected set; }
 
+        protected Subscription() { }
+
         public Subscription(NodeWrapper node, BraintreeService service)
         {
             Balance = node.GetDecimal("balance");

@@ -35,6 +35,7 @@ namespace Braintree
         public Address[] Addresses { get; protected set; }
         public Dictionary<String, String> CustomFields { get; protected set; }
 
+        protected Customer() {}
         internal Customer(NodeWrapper node, BraintreeService service)
         {
             if (node == null) return;

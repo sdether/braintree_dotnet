@@ -43,6 +43,7 @@ namespace Braintree
         public DateTime? CreatedAt { get; protected set; }
         public DateTime? UpdatedAt { get; protected set; }
 
+        protected Address() {}
         internal Address(NodeWrapper node)
         {
             if (node == null) return;
