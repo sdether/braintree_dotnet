@@ -25,7 +25,10 @@ namespace Braintree.Testing {
         public MockTransaction WithAddOn(MockAddOn addOn) {
             return this;
         }
-        public MockTransaction WithAmount( decimal? amount) {
+        public MockTransaction WithoutAddOns() {
+            return this;
+        }
+        public MockTransaction WithAmount(decimal? amount) {
             return this;
         }
         public MockTransaction WithAvsErrorResponseCode(string code) {
@@ -105,6 +108,9 @@ namespace Braintree.Testing {
         }
         public MockTransaction WithCustomFields( Dictionary<string, string> customFields) {
             return this;
+        }
+        public Result<Transaction> ToResult() {
+            return new MockResult<Transaction>(this);
         }
     }
 }

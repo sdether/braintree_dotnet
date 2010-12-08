@@ -111,5 +111,8 @@ namespace Braintree.Testing {
         public MockSubscription WithTrialDurationUnit(SubscriptionDurationUnit unit) {
             return this;
         }
+        public Result<Subscription> ToResult() {
+            return new MockResult<Subscription>(this);
+        }
     }
 }

@@ -45,11 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BraintreeTestingExtensions.cs" />
     <Compile Include="MockAddOn.cs" />
     <Compile Include="MockAddress.cs" />
     <Compile Include="MockCreditCard.cs" />
     <Compile Include="MockCustomer.cs" />
     <Compile Include="MockDiscount.cs" />
+    <Compile Include="MockResult.cs" />
     <Compile Include="MockSubscription.cs" />
     <Compile Include="MockTransaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

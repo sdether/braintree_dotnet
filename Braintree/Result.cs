@@ -16,6 +16,7 @@ namespace Braintree
         public String Message { get; protected set; }
         public T Target { get; protected set; }
 
+        protected Result() {}
         public Result(NodeWrapper node, BraintreeService service)
         {
             if (node.IsSuccess())
