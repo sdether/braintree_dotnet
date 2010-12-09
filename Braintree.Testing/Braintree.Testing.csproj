@@ -45,12 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Any.cs" />
     <Compile Include="BraintreeTestingExtensions.cs" />
+    <Compile Include="ICallbackProvider.cs" />
     <Compile Include="MockAddOn.cs" />
     <Compile Include="MockAddress.cs" />
     <Compile Include="MockCreditCard.cs" />
     <Compile Include="MockCustomer.cs" />
+    <Compile Include="MockCustomerGateway.cs" />
     <Compile Include="MockDiscount.cs" />
+    <Compile Include="MockGateway.cs" />
+    <Compile Include="MockGatewaySetup.cs" />
     <Compile Include="MockResult.cs" />
     <Compile Include="MockSubscription.cs" />
     <Compile Include="MockTransaction.cs" />
