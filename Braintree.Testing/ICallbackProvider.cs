@@ -3,6 +3,7 @@ using System.Reflection;
 namespace Braintree.Testing {
     internal interface ICallbackProvider
     {
-        object Invoke(params object[] args);
+        T Invoke<T>(params object[] args);
+        void Invoke(params object[] args);
     }
 }

@@ -4,9 +4,9 @@
         public static void Test()
         {
             var gateway = MockGateway.Configure()
-                .Setup(g => g.Customer.Delete(Any.String)).ReturnsVoid()
-                .Setup(g => g.Customer.Create(Any.CustomerRequest)).ReturnsCustomerResult(r => r.ToCustomer())
-                .Setup(g => g.Customer.Update(Any.String, Any.CustomerRequest))
+                .Setup(g => g.Customer.Delete(Arg.String)).ReturnsVoid()
+                .Setup(g => g.Customer.Create(Arg.CustomerRequest)).ReturnsCustomerResult(r => r.ToCustomer())
+                .Setup(g => g.Customer.Update(Arg.String, Arg.CustomerRequest))
                     .ValidateArguments<string, CustomerRequest>((id, r) => id == "abc")
                     .ExpectOnce()
                     .ReturnsDefault()

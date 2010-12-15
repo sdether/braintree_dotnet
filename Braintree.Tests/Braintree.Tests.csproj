@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -60,6 +60,7 @@
     <Compile Include="CreditCardVerificationTest.cs" />
     <Compile Include="CryptoTest.cs" />
     <Compile Include="CustomerTest.cs" />
+    <Compile Include="MockGatewayTests.cs" />
     <Compile Include="Plan.cs" />
     <Compile Include="QueryStringTest.cs" />
     <Compile Include="SubscriptionTest.cs" />
@@ -78,6 +79,10 @@
     <Compile Include="StringUtilTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Braintree.Testing\Braintree.Testing.csproj">
+      <Project>{A1625E07-3802-4FA3-90D6-399DFBBF74BC}</Project>
+      <Name>Braintree.Testing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Braintree\Braintree.csproj">
       <Project>{D0A473FA-E30B-4AF8-BB78-C1D81C9CAAB5}</Project>
       <Name>Braintree</Name>
