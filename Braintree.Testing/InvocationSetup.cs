@@ -23,6 +23,19 @@ namespace Braintree.Testing {
 
         public InvocationSetup ExpectMany(int times) {
             _target.ExpectedCalls = times;
+            _target.ExpectationType = ExpectationType.Exactly;
+            return this;
+        }
+
+        public InvocationSetup ExpectAtLeast(int times) {
+            _target.ExpectedCalls = times;
+            _target.ExpectationType = ExpectationType.AtLeast;
+            return this;
+        }
+
+        public InvocationSetup ExpectAtMost(int times) {
+            _target.ExpectedCalls = times;
+            _target.ExpectationType = ExpectationType.AtMost;
             return this;
         }
 
@@ -144,6 +157,29 @@ namespace Braintree.Testing {
             };
             return Complete();
         }
+
+        public new InvocationSetup<T> ExpectNone() {
+            return ExpectMany(0);
+        }
+
+        public new InvocationSetup<T> ExpectOnce() {
+            return ExpectMany(1);
+        }
+
+        public new InvocationSetup<T> ExpectMany(int times) {
+            base.ExpectMany(times);
+            return this;
+        }
+
+        public new InvocationSetup<T> ExpectAtLeast(int times) {
+            base.ExpectAtLeast(times);
+            return this;
+        }
+
+        public new InvocationSetup<T> ExpectAtMost(int times) {
+            base.ExpectAtMost(times);
+            return this;
+        }
     }
 
     public class InvocationSetup<T1, T2> : InvocationSetup {
@@ -157,6 +193,29 @@ namespace Braintree.Testing {
                 return returnCallback(arg1, arg2);
             };
             return Complete();
+        }
+
+        public new InvocationSetup<T1, T2> ExpectNone() {
+            return ExpectMany(0);
+        }
+
+        public new InvocationSetup<T1, T2> ExpectOnce() {
+            return ExpectMany(1);
+        }
+
+        public new InvocationSetup<T1, T2> ExpectMany(int times) {
+            base.ExpectMany(times);
+            return this;
+        }
+
+        public new InvocationSetup<T1, T2> ExpectAtLeast(int times) {
+            base.ExpectAtLeast(times);
+            return this;
+        }
+
+        public new InvocationSetup<T1, T2> ExpectAtMost(int times) {
+            base.ExpectAtMost(times);
+            return this;
         }
     }
 
@@ -172,6 +231,29 @@ namespace Braintree.Testing {
                 return returnCallback(arg1, arg2, arg3);
             };
             return Complete();
+        }
+
+        public new InvocationSetup<T1, T2, T3> ExpectNone() {
+            return ExpectMany(0);
+        }
+
+        public new InvocationSetup<T1, T2, T3> ExpectOnce() {
+            return ExpectMany(1);
+        }
+
+        public new InvocationSetup<T1, T2, T3> ExpectMany(int times) {
+            base.ExpectMany(times);
+            return this;
+        }
+
+        public new InvocationSetup<T1, T2, T3> ExpectAtLeast(int times) {
+            base.ExpectAtLeast(times);
+            return this;
+        }
+
+        public new InvocationSetup<T1, T2, T3> ExpectAtMost(int times) {
+            base.ExpectAtMost(times);
+            return this;
         }
     }
 }

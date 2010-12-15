@@ -24,6 +24,8 @@ namespace Braintree.Testing {
             }
         }
 
-        public void Verify() { }
+        public void Verify() {
+            _interceptor.Verify();
+        }
     }
 }

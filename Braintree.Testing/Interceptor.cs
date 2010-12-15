@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Braintree.Testing {
     internal class Interceptor : ICallbackProvider {
@@ -28,10 +29,41 @@ namespace Braintree.Testing {
                     where t.Method.ToString() == method.ToString()
                     let match = t.Match(args)
                     where match > 0
-                    orderby match descending 
+                    orderby match descending
                     select t.Invoke(args)
 
                 ).FirstOrDefault();
+        }
+
+        public void Verify() {
+            var failed = (from t in _targets
+                          let v = t.Verify()
+                          where !v.IsSuccessful
+                          select v)
+                .ToArray();
+            if(!failed.Any()) {
+                return;
+            }
+            throw new InvocationVerificationException(failed);
+        }
+    }
+
+    public class InvocationVerificationException : Exception {
+        public readonly InvocationVerification[] Failures;
+
+        public InvocationVerificationException(InvocationVerification[] failures) {
+            Failures = failures;
+        }
+
+        public override string Message {
+            get {
+                var sb = new StringBuilder();
+                sb.AppendLine("Gateway verification failed:");
+                foreach(var failure in Failures) {
+                    sb.AppendLine("  " + failure.FailureMessage);
+                }
+                return sb.ToString();
+            }
         }
     }
 }

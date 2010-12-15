@@ -24,22 +24,27 @@ namespace Braintree.Tests {
         public void Setup_with_validation_matches_before_setup_without() {
             var gateway = MockGateway.Configure()
                 .Setup(g => g.Customer.Update(Arg.String, Arg.CustomerRequest))
+                    .ExpectNone()
                     .ReturnsCustomerResult(r => r.ToCustomer((m) => m.WithId("novalidation")))
                 .Setup(g => g.Customer.Update(Arg.String, Arg.CustomerRequest))
                     .ValidateArguments<string, CustomerRequest>((id, r) => {
                         return id == "789";
                     })
+                    .ExpectNone()
                     .ReturnsCustomerResult(r => r.ToCustomer((m) => m.WithId("badvaldidation")))
                 .Setup(g => g.Customer.Update(Arg.String, Arg.CustomerRequest))
                     .ValidateArguments<string, CustomerRequest>((id, r) => {
                         return id == "1234" ? 2 : 0;
                     })
+                    .ExpectOnce()
                     .ReturnsCustomerResult(r => r.ToCustomer((m) => m.WithId("validation")))
                 .Build();
             var customerRequest = gateway.Customer.Update("1234",new CustomerRequest() { FirstName = "bob" });
             var customer = customerRequest.Target;
             Assert.AreEqual("bob", customer.FirstName);
             Assert.AreEqual("validation", customer.Id);
+            gateway.Verify();
         }
+
     }
 }
