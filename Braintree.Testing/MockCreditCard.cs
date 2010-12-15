@@ -17,7 +17,6 @@ namespace Braintree.Testing {
             var bin = number != null && number.Length >= 6 ? number.Substring(6) : null;
             var lastFour = number != null && number.Length >= 4 ? number.Substring(number.Length - 5, 4) : null;
             var cc = new MockCreditCard() {
-                BillingAddress = MockAddress.FromRequest(customerId, request.BillingAddress),
                 Bin = bin,
                 CardholderName = request.CardholderName,
                 CardType = CreditCardCardType.VISA,
@@ -25,54 +24,57 @@ namespace Braintree.Testing {
                 CustomerId = customerId,
                 ExpirationMonth = request.ExpirationMonth,
                 ExpirationYear = request.ExpirationYear,
-                IsDefault = request.Options.MakeDefault?? false,
+                IsDefault = request.Options.MakeDefault ?? false,
                 LastFour = lastFour,
             };
             if(!string.IsNullOrEmpty(request.ExpirationDate)) {
                 cc.ExpirationDate = request.ExpirationDate;
+            }
+            if(request.BillingAddress != null) {
+                cc.BillingAddress = MockAddress.FromRequest(customerId, request.BillingAddress);
             }
             return cc;
         }
 
         private MockCreditCard() { }
 
-        public MockCreditCard WithBin( string bin) {
+        public MockCreditCard WithBin(string bin) {
             return this;
         }
-        public MockCreditCard WithCardholderName( string cardholderName) {
+        public MockCreditCard WithCardholderName(string cardholderName) {
             return this;
         }
-        public MockCreditCard WithCardType( CreditCardCardType cardType) {
+        public MockCreditCard WithCardType(CreditCardCardType cardType) {
             return this;
         }
-        public MockCreditCard WithCreatedAt( DateTime? createdAt) {
+        public MockCreditCard WithCreatedAt(DateTime? createdAt) {
             return this;
         }
-        public MockCreditCard WithIsDefault( bool? ssDefault) {
+        public MockCreditCard WithIsDefault(bool? ssDefault) {
             return this;
         }
-        public MockCreditCard WithIsExpired( bool? isExpired) {
+        public MockCreditCard WithIsExpired(bool? isExpired) {
             return this;
         }
-        public MockCreditCard WithCustomerLocation( CreditCardCustomerLocation customerLocation) {
+        public MockCreditCard WithCustomerLocation(CreditCardCustomerLocation customerLocation) {
             return this;
         }
-        public MockCreditCard WithLastFour( string lastFour) {
+        public MockCreditCard WithLastFour(string lastFour) {
             return this;
         }
         public MockCreditCard WithSubscription(MockSubscription subscription) {
             return this;
         }
-        public MockCreditCard WithToken( string token) {
+        public MockCreditCard WithToken(string token) {
             return this;
         }
-        public MockCreditCard WithUpdatedAt( DateTime? updatedAt) {
+        public MockCreditCard WithUpdatedAt(DateTime? updatedAt) {
             return this;
         }
-        public MockCreditCard WithBillingAddress( MockAddress billingAddress) {
+        public MockCreditCard WithBillingAddress(MockAddress billingAddress) {
             return this;
         }
-        public MockCreditCard WithExpirationMonth( string expirationMonth) {
+        public MockCreditCard WithExpirationMonth(string expirationMonth) {
             return this;
         }
         public MockCreditCard WithExpirationYear(string expirationYear) {

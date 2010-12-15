@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 
 namespace Braintree.Testing {
+
+    // TODO: need to wrap all those arg casts and throw a proper exception on bad arg cast
     public class InvocationSetup {
         protected readonly InvocationTarget _target;
         protected readonly Func<InvocationTarget, MockGatewayBuilder> _completion;
@@ -39,6 +41,10 @@ namespace Braintree.Testing {
             return Complete();
         }
 
+        public MockGatewayBuilder ReturnsCustomerResult() {
+            return ReturnsCustomerResult(r => r.ToCustomer());
+        }
+
         public MockGatewayBuilder ReturnsDefault() {
             return Complete();
         }
@@ -55,15 +61,57 @@ namespace Braintree.Testing {
             return Setup<T1, T2, T3>().Returns(returnCallback);
         }
 
-        public InvocationSetup<T> ValidateArguments<T>(Func<T, bool> args) {
+        public InvocationSetup<T> ValidateArguments<T>(Func<T, bool> argsValidator) {
+            _target.Validator = (object[] args) => {
+                var arg1 = (T)args[0];
+                return argsValidator(arg1) ? 1 : 0;
+            };
             return Setup<T>();
         }
 
-        public InvocationSetup<T1, T2> ValidateArguments<T1, T2>(Func<T1, T2, bool> args) {
+        public InvocationSetup<T> ValidateArguments<T>(Func<T, int> argsValidator) {
+            _target.Validator = (object[] args) => {
+                var arg1 = (T)args[0];
+                return argsValidator(arg1);
+            };
+            return Setup<T>();
+        }
+
+        public InvocationSetup<T1, T2> ValidateArguments<T1, T2>(Func<T1, T2, bool> argsValidator) {
+            _target.Validator = (object[] args) => {
+                var arg1 = (T1)args[0];
+                var arg2 = (T2)args[1];
+                return argsValidator(arg1, arg2) ? 1 : 0;
+            };
             return Setup<T1, T2>();
         }
 
-        public InvocationSetup<T1, T2, T3> ValidateArguments<T1, T2, T3>(Func<T1, T2, T3, bool> args) {
+        public InvocationSetup<T1, T2> ValidateArguments<T1, T2>(Func<T1, T2, int> argsValidator) {
+            _target.Validator = (object[] args) => {
+                var arg1 = (T1)args[0];
+                var arg2 = (T2)args[1];
+                return argsValidator(arg1, arg2);
+            };
+            return Setup<T1, T2>();
+        }
+
+        public InvocationSetup<T1, T2, T3> ValidateArguments<T1, T2, T3>(Func<T1, T2, T3, bool> argsValidator) {
+            _target.Validator = (object[] args) => {
+                var arg1 = (T1)args[0];
+                var arg2 = (T2)args[1];
+                var arg3 = (T3)args[2];
+                return argsValidator(arg1, arg2, arg3) ? 1 : 0;
+            };
+            return Setup<T1, T2, T3>();
+        }
+
+        public InvocationSetup<T1, T2, T3> ValidateArguments<T1, T2, T3>(Func<T1, T2, T3, int> argsValidator) {
+            _target.Validator = (object[] args) => {
+                var arg1 = (T1)args[0];
+                var arg2 = (T2)args[1];
+                var arg3 = (T3)args[2];
+                return argsValidator(arg1, arg2, arg3);
+            };
             return Setup<T1, T2, T3>();
         }
 

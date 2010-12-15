@@ -6,12 +6,12 @@ namespace Braintree.Testing {
         public MethodInfo Method;
         public int ExpectedCalls;
         public Func<object[], object> Returns;
-        public Func<object[], bool> Validator;
+        public Func<object[], int> Validator;
 
         public int ActualCalls { get; private set; }
 
-        public bool Match(object[] args) {
-            return Validator == null || Validator(args);
+        public int Match(object[] args) {
+            return Validator == null ? 1 : (Validator(args) + 1);
         }
 
         public object Invoke(object[] args) {

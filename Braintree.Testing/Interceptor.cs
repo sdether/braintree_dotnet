@@ -26,8 +26,11 @@ namespace Braintree.Testing {
             return (from t in _targets
                     // Note: string signature comparison of methodinfo is cheesy
                     where t.Method.ToString() == method.ToString()
-                          && t.Match(args)
+                    let match = t.Match(args)
+                    where match > 0
+                    orderby match descending 
                     select t.Invoke(args)
+
                 ).FirstOrDefault();
         }
     }
