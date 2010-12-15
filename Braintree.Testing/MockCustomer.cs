@@ -64,7 +64,7 @@ namespace Braintree.Testing {
         public MockCustomer WithCustomFields(Dictionary<String, string> CustomFields) {
             return this;
         }
-        public Result<Customer> ToResult() {
+        public MockResult<Customer> ToResult() {
             return new MockResult<Customer>(this);
         }
     }

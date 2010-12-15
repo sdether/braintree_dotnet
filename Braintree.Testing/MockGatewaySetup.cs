@@ -2,10 +2,10 @@ using System;
 
 namespace Braintree.Testing {
     public class MockGatewaySetup {
-        private readonly MockGateway _gateway;
+        private readonly MockGatewayBuilder _builder;
 
-        internal MockGatewaySetup(MockGateway gateway) {
-            _gateway = gateway;
+        internal MockGatewaySetup(MockGatewayBuilder builder) {
+            _builder = builder;
         }
 
         public MockGatewaySetup ExpectNone() {
@@ -20,16 +20,16 @@ namespace Braintree.Testing {
             return this;
         }
 
-        public MockGateway ReturnsVoid() {
-            return _gateway;
+        public MockGatewayBuilder ReturnsVoid() {
+            return _builder;
         }
 
-        public MockGateway ReturnsCustomerResult(Func<CustomerRequest, Result<Customer>> request) {
-            return _gateway;
+        public MockGatewayBuilder ReturnsCustomerResult(Func<CustomerRequest, Result<Customer>> request) {
+            return _builder;
         }
 
-        public MockGateway ReturnsDefault() {
-            return _gateway;
+        public MockGatewayBuilder ReturnsDefault() {
+            return _builder;
         }
 
         public MockGatewaySetup ValidateArguments<T>(Func<T, bool> args) {

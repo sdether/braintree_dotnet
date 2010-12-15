@@ -1,13 +1,16 @@
 using System;
+using System.Diagnostics;
 
 namespace Braintree.Testing {
     public class MockCustomerGateway : CustomerGateway {
+        private readonly ICallbackProvider _callbackProvider;
+
         internal MockCustomerGateway(ICallbackProvider callbackProvider) {
-            throw new NotImplementedException();
+            _callbackProvider = callbackProvider;
         }
 
         public override ResourceCollection<Customer> All() {
-            return base.All();
+            return (ResourceCollection<Customer>)_callbackProvider.Invoke();
         }
     }
 }

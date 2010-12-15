@@ -109,7 +109,7 @@ namespace Braintree.Testing {
         public MockTransaction WithCustomFields( Dictionary<string, string> customFields) {
             return this;
         }
-        public Result<Transaction> ToResult() {
+        public MockResult<Transaction> ToResult() {
             return new MockResult<Transaction>(this);
         }
     }
