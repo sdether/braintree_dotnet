@@ -43,6 +43,11 @@ namespace Braintree.Testing {
             return Complete();
         }
 
+        public MockGatewayBuilder Throws(Exception e) {
+            _target.Returns = (object[] args) => { throw e; };
+            return Complete();
+        }
+
         public MockGatewayBuilder ReturnsCustomerResult(Func<CustomerRequest, Result<Customer>> request) {
             _target.Returns = (object[] args) => {
                 var customerRequest = args.Where(x => typeof(CustomerRequest).IsAssignableFrom(x.GetType())).FirstOrDefault() as CustomerRequest;

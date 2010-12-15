@@ -14,6 +14,8 @@ namespace Braintree
     {
         private BraintreeService Service;
 
+        protected AddressGateway() {}
+
         internal AddressGateway(BraintreeService service)
         {
             Service = service;
